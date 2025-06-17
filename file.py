@@ -1,95 +1,57 @@
+
 import streamlit as st
-import os
-import re
 
-# -------- Helper Functions -------- #
+# Helper function to validate binary input
+def is_binary(s):
+    return all(char in '01' for char in s)
 
-def sanitize_filename(name):
-    """Remove unsafe characters from filename."""
-    return re.sub(r'[^a-zA-Z0-9_\-.]', '_', name)
+# Binary arithmetic operations
+def binary_add(a, b):
+    return bin(int(a, 2) + int(b, 2))[2:]
 
-def create_file(file_path):
-    """Create a new text file with initial content."""
-    try:
-        with open(file_path, 'w') as file:
-            file.write("This is the initial content of the file.\n")
-        st.success(f"File created successfully at: {file_path}")
-    except Exception as e:
-        st.error(f"Error creating file: {e}")
+def binary_subtract(a, b):
+    return bin(int(a, 2) - int(b, 2))[2:]
 
-def delete_file(file_path):
-    """Delete the specified file."""
-    try:
-        if os.path.exists(file_path):
-            os.remove(file_path)
-            st.success(f"File deleted: {file_path}")
-        else:
-            st.warning("File does not exist.")
-    except Exception as e:
-        st.error(f"Error deleting file: {e}")
+def binary_multiply(a, b):
+    return bin(int(a, 2) * int(b, 2))[2:]
 
-def list_files_in_directory(directory):
-    """List all files in the specified directory."""
-    try:
-        return [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
-    except Exception as e:
-        st.error(f"Error accessing directory: {e}")
-        return []
+def binary_divide(a, b):
+    if int(b, 2) == 0:
+        raise ZeroDivisionError("Division by zero is not allowed.")
+    return bin(int(a, 2) // int(b, 2))[2:]
 
-def show_file_content(file_path):
-    """Show content of the selected file."""
-    try:
-        with open(file_path, 'r') as file:
-            content = file.read()
-        st.text_area("File Content", content, height=200)
-    except Exception as e:
-        st.error(f"Unable to read file: {e}")
+# Streamlit UI
+st.set_page_config(page_title="Binary Calculator", layout="centered")
+st.title("🔢 Binary Arithmetic Calculator")
 
-# -------- Streamlit UI -------- #
+st.markdown("Enter two binary numbers and choose an operation.")
 
-st.set_page_config(page_title="File Manager App", layout='centered')
-st.title("📁 File Manager with Path Selection")
+# Input fields
+bin1 = st.text_input("Binary Number 1 (e.g. 1010)")
+bin2 = st.text_input("Binary Number 2 (e.g. 0101)")
+operation = st.selectbox("Select Operation", ["Addition", "Subtraction", "Multiplication", "Division"])
 
-st.write("Create, delete, or view files by entering a custom path.")
-
-operation = st.selectbox("Choose an operation:", ["Create File", "Delete File", "View File"])
-
-directory = st.text_input("Enter the directory path:", value=os.getcwd())
-
-if not os.path.isdir(directory):
-    st.warning("Please enter a valid directory path.")
-else:
-    if operation == "Create File":
-        file_name = st.text_input("Enter new file name (e.g., `note.txt`):")
-        if st.button("Create File"):
-            if file_name.strip():
-                safe_name = sanitize_filename(file_name.strip())
-                full_path = os.path.join(directory, safe_name)
-                if not os.path.exists(full_path):
-                    create_file(full_path)
+if st.button("Calculate"):
+    # Validation
+    if not is_binary(bin1) or not is_binary(bin2):
+        st.error("Please enter valid binary numbers (only 0 and 1).")
+    else:
+        try:
+            if operation == "Addition":
+                result = binary_add(bin1, bin2)
+            elif operation == "Subtraction":
+                if int(bin1, 2) < int(bin2, 2):
+                    st.error("Result would be negative. Not supported in binary unsigned mode.")
+                    result = None
                 else:
-                    st.warning("File already exists.")
-            else:
-                st.warning("Please enter a valid file name.")
+                    result = binary_subtract(bin1, bin2)
+            elif operation == "Multiplication":
+                result = binary_multiply(bin1, bin2)
+            elif operation == "Division":
+                result = binary_divide(bin1, bin2)
 
-    elif operation == "Delete File":
-        files = list_files_in_directory(directory)
-        if files:
-            file_to_delete = st.selectbox("Select file to delete:", files)
-            if st.button("Delete File"):
-                delete_file(os.path.join(directory, file_to_delete))
-        else:
-            st.info("No files found to delete in the selected directory.")
-
-    elif operation == "View File":
-        files = list_files_in_directory(directory)
-        if files:
-            file_to_view = st.selectbox("Select file to view:", files)
-            show_file_content(os.path.join(directory, file_to_view))
-        else:
-            st.info("No files available to view in the selected directory.")
-
-    # Optional: List all files in the selected directory
-    st.markdown("---")
-    st.subheader("📄 Files in Selected Directory:")
-    st.code("\n".join(list_files_in_directory(directory)) or "No files found.")
+            if result is not None:
+                st.success(f"✅ Binary Result: `{result}`")
+                st.info(f"🧮 Decimal Result: `{int(result, 2)}`")
+        except ZeroDivisionError as e:
+            st.error(str(e))
