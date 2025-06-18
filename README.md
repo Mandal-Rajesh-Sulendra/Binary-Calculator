@@ -26,20 +26,7 @@ A simple and efficient Python-based calculator to perform **binary arithmetic op
 
 ## 🛠️ Technologies Used
 
-- Python 3.x
+- Python 3.11
 - Standard library only (no external dependencies)
 
 ---
-
-## 🧪 Example
-
-```python
-# Example usage in Python:
-from binary_calculator import BinaryCalculator
-
-calc = BinaryCalculator()
-
-print(calc.add("1010", "1101"))        # Output: 10111
-print(calc.subtract("1101", "1010"))   # Output: 0011
-print(calc.multiply("101", "11"))      # Output: 1111
-print(calc.divide("1100", "10"))       # Output: ('110', '0')  -> quotient and remainder
