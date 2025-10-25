@@ -7,133 +7,109 @@ Role: B.Tech CSE (AI & ML) Student
 
 ---
 
-Project Overview
+📘 Project Overview
 
-This project is a Binary Arithmetic Calculator designed to perform addition, subtraction, multiplication, and division on binary numbers.
-It provides an interactive interface for users to input binary numbers and instantly get results in both binary and decimal formats.
+This project demonstrates how to perform basic binary arithmetic operations—addition, subtraction, multiplication, and division—using Python. It's designed to help users understand and practice binary arithmetic, essential in computer science and digital electronics.
 
-> Goal: Help users understand and practice binary arithmetic while providing accurate calculations in a user-friendly environment.
 
+---
+
+⚙️ Features
+
+Binary Addition: Adds two binary numbers.
+
+Binary Subtraction: Subtracts one binary number from another.
+
+Binary Multiplication: Multiplies two binary numbers.
+
+Binary Division: Divides one binary number by another (integer division).
+
+Input Validation: Ensures that inputs are valid binary numbers (only 0s and 1s).
+
+User-Friendly Interface: Built with Streamlit for an interactive experience.
 
 
 
 ---
 
-Key Features
-
-Interactive User Interface: Built with Streamlit for a smooth and modern user experience.
-
-Binary Validation: Ensures only valid binary numbers (0 and 1) are accepted.
-
-Multiple Operations: Supports Addition, Subtraction, Multiplication, and Division.
-
-Error Handling:
-
-Division by zero is prevented.
-
-Negative results in unsigned binary subtraction are flagged.
-
-
-Dual Output: Shows result in binary and decimal simultaneously.
-
-
-
----
-
-How It Works
+🧪 How It Works
 
 1. Input: Users enter two binary numbers.
 
 
-2. Validation: Checks that inputs contain only 0 and 1.
+2. Validation: The app checks if the inputs are valid binary numbers.
 
 
-3. Operation Selection: User selects the arithmetic operation.
+3. Operation Selection: Users choose the desired arithmetic operation.
 
 
-4. Calculation: Performs binary arithmetic and converts results to decimal.
+4. Calculation: The app performs the selected operation on the binary inputs.
 
 
-5. Output: Displays binary result and decimal equivalent.
+5. Output: Displays the result in both binary and decimal formats.
 
 
 
 
 ---
 
-Tech Stack & Keywords
+🛠️ Tech Stack
 
 Programming Language: Python
 
-Framework: Streamlit (Interactive Web App)
+Framework: Streamlit
 
-Binary Arithmetic: Addition, Subtraction, Multiplication, Division
-
-Validation & Error Handling: Binary input checks, zero-division prevention
-
-Keywords: Binary Calculator, Binary Arithmetic, Streamlit App, Interactive Calculator, Decimal Conversion, Python Project
+Libraries: None (standard Python libraries used)
 
 
 
 ---
 
-Usage
+🚀 Usage
 
 1. Clone the repository:
 
+git clone https://github.com/Mandal-Rajesh-Sulendra/Binary-Calculator.git
 
 
-git clone https://github.com/yourusername/binary-calculator.git
+2. Navigate to the project directory:
 
-2. Install dependencies:
-
-
-
-pip install -r requirements.txt
-
-3. Run the app:
+cd Binary-Calculator
 
 
+3. Install Streamlit:
+
+pip install streamlit
+
+
+4. Run the application:
 
 streamlit run app.py
 
-4. Enter two binary numbers and select an operation to see the result.
+
+5. Open the provided local URL in your browser to use the calculator. 
 
 
+💡 Use Cases
 
+Learning Tool: Ideal for students learning about binary arithmetic.
 
----
+Educational Resource: Useful for teaching digital electronics or computer architecture.
 
-Demo
-
-
-
-> The calculator instantly computes the binary result and shows the decimal equivalent, with clear feedback for errors or invalid inputs.
-
-
-
-
----
-
-Why This Project Matters
-
-Provides a hands-on tool for learning binary arithmetic, essential in computer science.
-
-Useful for students, educators, and hobbyists interested in digital systems and programming fundamentals.
-
-Demonstrates interactive Python applications with Streamlit.
+Practical Application: Can be used in building command-line tools or embedded systems.
 
 
 
 ---
 
-Future Enhancements
+🔮 Future Enhancements
 
-Add support for negative binary numbers (two’s complement).
+Support for Negative Binary Numbers: Implement two's complement representation.
 
-Include binary to hexadecimal and octal conversions.
+Hexadecimal and Octal Support: Allow conversions and operations with hexadecimal and octal numbers.
 
-Add history tracking for previous calculations.
+Graphical User Interface (GUI): Develop a GUI version using Tkinter or PyQt.
 
-Make a mobile-friendly UI for broader accessibility.
+Advanced Operations: Add support for floating-point binary arithmetic.
+
 
